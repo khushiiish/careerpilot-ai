@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme  {
+  --color-ink: #0E1116;
+  --color-surface: #161B22;
+  --color-paper: #F8F9FA;
+  --color-muted: #8B949E;
+  --color-signal: #E8BCC9;
+  --color-verified: #4F8A75;
+
+  --font-display:var(--font-display)
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+
+
+
+  @keyframes scan {
+    0% {
+      top: -2%;
+      opacity: 0;
+    }
+
+    10% {
+      opacity: 1;
+    }
+
+    90% {
+      opacity: 1;
+    }
+
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
+  }
+
+.animate-scan {
+  animation: scan 4s ease-in-out infinite;
+}
