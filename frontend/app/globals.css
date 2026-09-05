@@ -8,7 +8,7 @@
   --color-signal: #E8BCC9;
   --color-verified: #4F8A75;
 
-  --font-display:var(--font-display)
+  --font-display:var(--font-display);
   --font-body: var(--font-body);
   --font-mono: var(--font-mono);
 }

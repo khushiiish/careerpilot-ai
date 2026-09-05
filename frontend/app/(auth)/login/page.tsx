@@ -1,5 +1,6 @@
-"use client"
+"use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -13,24 +14,23 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  return(
+  return (
     <>
-    <p className="font-mono text-xs text-muted uppercase tracking-widest mb-2">Welcome back</p>
-    <h2 className='font-display text-2xl font-semibold mb-1'>Log in</h2>
-    <p className="text-muted text-sm mb-8">Pick up right where you left off</p>
+      <p className="font-mono text-xs text-muted uppercase tracking-widest mb-2">
+        Welcome back
+      </p>
+      <h2 className="font-display text-2xl font-semibold mb-1">Log in</h2>
+      <p className="text-muted text-sm mb-8">
+        Pick up right where you left off
+      </p>
 
-    {error && (
-      <div className="mb-5 px-3 py-2 rounded-md bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-        {error}
+      {error && (
+        <div className="mb-5 px-3 py-2 rounded-md bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+          {error}
+        </div>
+      )}
 
-      </div>
-    )}
-
-    <form className="space-y-4">
-       
-
-      
-
+      <form className="space-y-4">
         {/* EMAIL */}
         <div>
           <label className="font-mono text-xs text-gray-500 uppercase tracking-wide">
@@ -42,9 +42,7 @@ export default function LoginPage() {
             type="email"
             required
             value={form.email}
-            onChange={(e) =>
-              setForm({ ...form, email: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
             placeholder="you@example.com"
           />
         </div>
@@ -61,9 +59,7 @@ export default function LoginPage() {
             minLength={6}
             required
             value={form.password}
-            onChange={(e) =>
-              setForm({ ...form, password: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
             placeholder="At least 6 characters"
           />
         </div>
@@ -72,13 +68,20 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-pink-300 text-black font-medium text-sm rounded-md py-2.5 mt-2 hover:bg-pink-400 disabled:opacity-50 transition"
+          className="w-full bg-signal text-ink font-medium text-sm rounded-md py-2.5 mt-2 hover:bg-signal/90 disabled:opacity-50 transition"
         >
           {loading ? "Logging in..." : "Log in"}
         </button>
-
       </form>
+      <p className="mt-6 text-center text-sm text-gray-500">
+        Don&apos;t have an account?{" "}
+        <Link
+          href="/signup"
+          className="font-medium text-pink-500 hover:text-pink-600 transition"
+        >
+          Create one
+        </Link>
+      </p>
     </>
-  )
-
+  );
 }
