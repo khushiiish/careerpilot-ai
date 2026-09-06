@@ -58,7 +58,7 @@
 //     )
     
 // }
-"use client"
+"use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -77,17 +77,16 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <div className="w-full max-w-md mx-auto">
-
-      <p className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-2">
+    <>
+      <p className="font-mono text-xs text-[#E8BCC9] uppercase tracking-widest mb-2">
         Step 1 of 1
       </p>
 
-      <h2 className="text-2xl font-semibold mb-1">
+      <h2 className="text-2xl font-semibold mb-1 text-white">
         Create your account
       </h2>
 
-      <p className="text-gray-600 mb-6">
+      <p className="text-[#8B949E] text-sm mb-6">
         Start scanning your resume in under a minute
       </p>
 
@@ -98,58 +97,48 @@ export default function SignupPage() {
       )}
 
       <form className="space-y-4">
-
         {/* NAME */}
         <div>
-          <label className="font-mono text-xs text-gray-500 uppercase tracking-wide">
+          <label className="font-mono text-xs text-[#8B949E] uppercase tracking-wide">
             Name
           </label>
-
           <input
-            className="mt-1.5 w-full bg-white border border-gray-300 rounded-md py-2.5 px-3 text-sm text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-300 transition"
+            className="mt-1.5 w-full bg-[#161B22] border border-white/10 rounded-md py-2.5 px-3 text-sm text-[#F8F9FA] placeholder:text-[#8B949E]/50 focus:outline-none focus:ring-2 focus:ring-[#E8BCC9]/40 focus:border-[#E8BCC9] transition"
             type="text"
             required
             value={form.name}
-            onChange={(e) =>
-              setForm({ ...form, name: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
             placeholder="Khushi Sharma"
           />
         </div>
 
         {/* EMAIL */}
         <div>
-          <label className="font-mono text-xs text-gray-500 uppercase tracking-wide">
+          <label className="font-mono text-xs text-[#8B949E] uppercase tracking-wide">
             Email
           </label>
-
           <input
-            className="mt-1.5 w-full bg-white border border-gray-300 rounded-md py-2.5 px-3 text-sm text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-300 transition"
+            className="mt-1.5 w-full bg-[#161B22] border border-white/10 rounded-md py-2.5 px-3 text-sm text-[#F8F9FA] placeholder:text-[#8B949E]/50 focus:outline-none focus:ring-2 focus:ring-[#E8BCC9]/40 focus:border-[#E8BCC9] transition"
             type="email"
             required
             value={form.email}
-            onChange={(e) =>
-              setForm({ ...form, email: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
             placeholder="you@example.com"
           />
         </div>
 
         {/* PASSWORD */}
         <div>
-          <label className="font-mono text-xs text-gray-500 uppercase tracking-wide">
+          <label className="font-mono text-xs text-[#8B949E] uppercase tracking-wide">
             Password
           </label>
-
           <input
-            className="mt-1.5 w-full bg-white border border-gray-300 rounded-md py-2.5 px-3 text-sm text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-300 transition"
+            className="mt-1.5 w-full bg-[#161B22] border border-white/10 rounded-md py-2.5 px-3 text-sm text-[#F8F9FA] placeholder:text-[#8B949E]/50 focus:outline-none focus:ring-2 focus:ring-[#E8BCC9]/40 focus:border-[#E8BCC9] transition"
             type="password"
             minLength={6}
             required
             value={form.password}
-            onChange={(e) =>
-              setForm({ ...form, password: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
             placeholder="At least 6 characters"
           />
         </div>
@@ -158,21 +147,21 @@ export default function SignupPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-pink-300 text-black font-medium text-sm rounded-md py-2.5 mt-2 hover:bg-pink-400 disabled:opacity-50 transition"
+          className="w-full bg-[#E8BCC9] text-[#0E1116] font-semibold text-sm rounded-md py-2.5 mt-2 hover:bg-[#f2cbd6] disabled:opacity-50 transition-all duration-200"
         >
           {loading ? "Creating account..." : "Create Account"}
         </button>
-
       </form>
-      <p className="text-sm text-gray-500 mt-6 text-center">
-  Already have an account?{" "}
-  <Link
-    className="text-pink-500 hover:text-pink-600 transition"
-    href="/login"
-  >
-    Log in
-  </Link>
-</p>
-    </div>
+
+      <p className="text-sm text-[#8B949E] mt-6 text-center">
+        Already have an account?{" "}
+        <Link
+          className="font-medium text-[#E8BCC9] hover:underline transition"
+          href="/login"
+        >
+          Log in
+        </Link>
+      </p>
+    </>
   );
 }

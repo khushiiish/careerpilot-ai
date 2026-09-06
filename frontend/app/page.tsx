@@ -75,6 +75,9 @@ export default function Home() {
           ))}
 
         </div>
+        <footer className="px-8 py-5 border-t border-white/5 text-center">
+          <p className="font-mono text-xs text-muted">Build with Love. @Khushisharma</p>
+        </footer>
 
 
     </div>
