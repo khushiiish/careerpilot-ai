@@ -3,10 +3,12 @@ import {
   AuthError,
   loginUser,
   signupUser,
+    logoutUser,
 } from "../services/auth.service";
 import { SignupInput, LoginInput } from "../types/auth.types";
 import logger from "../utils/logger";
 import { Request, Response } from "express";
+import { AuthRequest } from "../middlewares/auth.middleware";
 
 const REFRESH_COOKIE_OPTIONS = {
   httpOnly: true,
@@ -92,5 +94,26 @@ export async function login(
       status: "error",
       message: "Something went wrong",
     });
+  }
+}
+
+export async function logout(req:AuthRequest,res:Response):Promise<void>{
+  try{
+    const authHeader=req.headers.authorization;
+    const accessToken=authHeader?.split(" ")[1];
+    const userId=req.userId;
+
+    if(accessToken && userId){
+      await logoutUser(accessToken,userId);
+    }
+    res.clearCookie("refreshToken",REFRESH_COOKIE_OPTIONS);
+    res.status(200).json({status:"success",message:"Logged out successfully"});
+
+
+
+
+  }catch(err){
+    logger.error("logout failed",{error:(err as Error).message});
+    res.status(500).json({status:"error",message:"Something went wrong"})
   }
 }
