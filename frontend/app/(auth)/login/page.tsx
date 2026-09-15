@@ -1,11 +1,16 @@
 "use client";
 
+import { loginRequest } from "@/src/lib/authService";
+import { useAuthStore } from "@/src/store/authStore";
+import { ApiErrorResponse } from "@/src/types/auth";
+import { isAxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
+  const setAuth=useAuthStore((s)=> s.setAuth);
 
   const [form, setForm] = useState({
     email: "",
@@ -13,6 +18,28 @@ export default function LoginPage() {
   });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e:React.FormEvent){
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try{
+      const data=await loginRequest(form);
+      setAuth(data.user ,data.accessToken);
+      router.push("/dashboard")
+
+    }catch{
+      if(isAxiosError<ApiErrorResponse>(err)){
+        setError(err.response?.data.message ?? "Invalid email or password");
+      }else{
+        setError("Something went wrong");
+      }
+
+    }finally{
+      setLoading(false)
+    }
+  }
 
   return (
     <>
@@ -32,7 +59,7 @@ export default function LoginPage() {
         </div>
       )}
 
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit}className="space-y-4">
         {/* EMAIL */}
         <div>
           <label className="font-mono text-xs text-[#8B949E] uppercase tracking-wide">

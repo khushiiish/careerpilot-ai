@@ -60,6 +60,10 @@
 // }
 "use client";
 
+import { signupRequest } from "@/src/lib/authService";
+import { useAuthStore } from "@/src/store/authStore";
+import { ApiErrorResponse } from "@/src/types/auth";
+import { isAxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -75,6 +79,31 @@ export default function SignupPage() {
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const setAuth=useAuthStore((s)=> s.setAuth)
+
+  async function handleSubmit(e:React.FormEvent) 
+  {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try{
+      const data=await signupRequest(form);
+      setAuth(data.user,data.accessToken);
+      router.push("/dashboard")
+
+    }catch(err){
+      if(isAxiosError<ApiErrorResponse>(err)){
+        setError(err.response?.data?.message ?? err?.response?.data?.errors?.[0]?.message ?? "Sign up failed")
+      }else{
+        setError("Something went wrong")
+      }
+
+    }finally{
+      setLoading(false)
+    }
+    
+  }
 
   return (
     <>
@@ -96,7 +125,7 @@ export default function SignupPage() {
         </div>
       )}
 
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit}className="space-y-4">
         {/* NAME */}
         <div>
           <label className="font-mono text-xs text-[#8B949E] uppercase tracking-wide">
