@@ -78,6 +78,9 @@ export default function DashboardPage() {
             ))}
           </div>
         )}
+        <div className='mb-8'>
+          <ResumeUpload/>
+        </div>
       </main>
     </div>
   );
