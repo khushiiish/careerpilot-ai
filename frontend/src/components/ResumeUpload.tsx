@@ -2,6 +2,8 @@
 
 import { useRef, useState } from "react";
 import { useResumeStore } from "../store/resumeStore";
+import { isAxiosError } from "axios";
+import { uploadResumeRequest } from "../lib/resumeService";
 
 export default function ResumeUpload() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -10,6 +12,45 @@ export default function ResumeUpload() {
   const [error, setError] = useState<string | null>(null);
 
   const { isUploading, setUploading, addResume } = useResumeStore();
+
+  async function handleFile(file:File){
+    if(file.type !== "application/pdf"){
+      setError("Only PDF files are allowed");
+      return
+    };
+    if(file.size > 5 * 1024 * 1024){
+      setError("File must be under 5MB");
+      return
+    }
+    setError(null);
+    setUploading(true);
+    try{
+      const data=await uploadResumeRequest(file);
+      addResume({
+        id:data.resume.id,
+        originalName:data.resume.originalName,
+        parsedSkills:data.resume.parsedData,
+        atsScore:null,
+        createdAt:new Date().toISOString()
+      })
+
+    }catch(err){
+      if(isAxiosError(err)){
+        setError(err.response?.data.message ?? "Upload failed");
+      }else{
+        setError("Something went wrong")
+      }
+    }finally{
+      setUploading(false)
+    }
+
+  }
+  function handleDrop(e:React.DragEvent){
+    e.preventDefault();
+    setDragOver(false);
+    const file=e.dataTransfer.files[0];
+    if(file) handleFile(file)
+  }
 
   return (
     <div className="w-full">
@@ -25,6 +66,7 @@ export default function ResumeUpload() {
           setDragOver(true);
         }}
         onDragLeave={() => setDragOver(false)}
+        onDrop={handleDrop}
         
         className={`
           relative border-2 border-dashed rounded-lg p-10 text-center cursor-pointer transition-all
