@@ -2,10 +2,12 @@
 import { useRequireAuth } from "@/src/hooks/useRequireAuth";
 import { logoutRequest } from "@/src/lib/authService";
 import { useAuthStore } from "@/src/store/authStore";
+import { useRouter } from "next/navigation";
 import { useResumeStore } from "@/src/store/resumeStore";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import ResumeUpload from "@/src/components/ResumeUpload";
 import React, { useEffect } from "react";
+import ResumeCard from "@/src/components/ResumeCard";
 
 export default function DashboardPage() {
   const { user, isAuthenticated } = useRequireAuth();
@@ -81,6 +83,18 @@ export default function DashboardPage() {
         <div className='mb-8'>
           <ResumeUpload/>
         </div>
+
+        {activeResume ? (
+          <ResumeCard />
+          ):(
+            <div className="border border-white/10 rounded-lg p-10 text-center">
+              <p className="font-mono text-xs text-muted uppercase tracking-widest mb-2">No Resume yet</p>
+              <p className="text-sm text-muted">Upload your resume above to get started with AI Analysis </p>
+
+
+            </div>
+
+          )}
       </main>
     </div>
   );
