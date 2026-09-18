@@ -61,6 +61,7 @@ export default function ResumeUpload() {
       )}
 
       <div
+      onClick={()=> !isUploading && fileInputRef.current?.click()}
         onDragOver={(e) => {
           e.preventDefault();
           setDragOver(true);
@@ -81,8 +82,10 @@ export default function ResumeUpload() {
         <input
           onChange={(e) => {
             const file = e.target.files?.[0];
-
-          
+            if (file) {
+              handleFile(file);
+            }
+            e.target.value = "";
           }}
           ref={fileInputRef}
           type="file"

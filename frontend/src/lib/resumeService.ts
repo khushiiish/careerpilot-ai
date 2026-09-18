@@ -6,7 +6,7 @@ export async function uploadResumeRequest(file:File){
     const formData=new FormData();
     formData.append("resume",file);
 
-    const {data}=await api.post("/resumes/uppload",formData,{
+    const {data}=await api.post("/resumes/upload",formData,{
         headers:{"Content-Type":"multipart/form-data"},
     })
     return data;

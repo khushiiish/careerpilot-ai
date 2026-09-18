@@ -134,6 +134,7 @@ export default function SignupPage() {
           <input
             className="mt-1.5 w-full bg-[#161B22] border border-white/10 rounded-md py-2.5 px-3 text-sm text-[#F8F9FA] placeholder:text-[#8B949E]/50 focus:outline-none focus:ring-2 focus:ring-[#E8BCC9]/40 focus:border-[#E8BCC9] transition"
             type="text"
+            autoComplete="name"
             required
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -149,6 +150,7 @@ export default function SignupPage() {
           <input
             className="mt-1.5 w-full bg-[#161B22] border border-white/10 rounded-md py-2.5 px-3 text-sm text-[#F8F9FA] placeholder:text-[#8B949E]/50 focus:outline-none focus:ring-2 focus:ring-[#E8BCC9]/40 focus:border-[#E8BCC9] transition"
             type="email"
+            autoComplete="email"
             required
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -164,6 +166,7 @@ export default function SignupPage() {
           <input
             className="mt-1.5 w-full bg-[#161B22] border border-white/10 rounded-md py-2.5 px-3 text-sm text-[#F8F9FA] placeholder:text-[#8B949E]/50 focus:outline-none focus:ring-2 focus:ring-[#E8BCC9]/40 focus:border-[#E8BCC9] transition"
             type="password"
+            autoComplete="new-password"
             minLength={6}
             required
             value={form.password}

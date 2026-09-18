@@ -5,6 +5,7 @@ import compression from "compression";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
+import resumeRoutes from "./routes/resume.routes";
 
 import logger from "./utils/logger";
 import authRoutes from "./routes/auth.routes";
@@ -66,6 +67,7 @@ app.get("/api/health", (_req, res) => {
 });
 
 app.use("/api/auth", authLimiter, authRoutes);
+app.use("/api/resumes",resumeRoutes);
 
 app.get("/api/db-check", async (_req, res) => {
   try {
