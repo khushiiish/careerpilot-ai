@@ -10,6 +10,8 @@ import resumeRoutes from "./routes/resume.routes";
 import logger from "./utils/logger";
 import authRoutes from "./routes/auth.routes";
 import prisma from "./lib/prisma";
+import analyzeRoutes from "./routes/analyze.routes";
+import interviewRoutes from "./routes/interview.routes"
 
 const app: Application = express();
 
@@ -68,6 +70,8 @@ app.get("/api/health", (_req, res) => {
 
 app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/resumes",resumeRoutes);
+app.use("/api/analyze",analyzeLimiter,analyzeRoutes);
+app.use("/api/interview",analyzeLimiter,interviewRoutes)
 
 app.get("/api/db-check", async (_req, res) => {
   try {
