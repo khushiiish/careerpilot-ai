@@ -8,6 +8,7 @@ import Link from "next/link";
 import ResumeUpload from "@/src/components/ResumeUpload";
 import React, { useEffect } from "react";
 import ResumeCard from "@/src/components/ResumeCard";
+import { getMyResumesRequest } from "@/src/lib/resumeService";
 
 export default function DashboardPage() {
   const { user, isAuthenticated } = useRequireAuth();
@@ -18,7 +19,11 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!isAuthenticated) return;
-  }, [isAuthenticated]);
+  
+  getMyResumesRequest()
+  .then((data)=> setResumes(data.resumes))
+  .catch(()=>{});
+},[isAuthenticated]);
 
   async function handleLogout() {
     try {

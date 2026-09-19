@@ -44,3 +44,11 @@ export interface InterviewQuestionsResult  {
     questions:InterviewQuestion[];
     focusArea:string[]
 }
+
+export interface SkillGapResult {
+  matchScore: number;
+  matchedSkills: string[];
+  missingSkills: string[];
+  recommendedSkills: string[];
+  summary: string;
+}
