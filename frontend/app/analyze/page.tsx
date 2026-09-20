@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 
 export default function AnalyzePage() {
   const { isAuthenticated } = useRequireAuth();
-  const { resumes } = useResumeStore();
+  const { resumes, setResumes } = useResumeStore();
 
   const [selectedResumeId, setSelectedResumeId] = useState("");
   const [jobDescription, setJobDescription] = useState("");
@@ -273,9 +273,9 @@ export default function AnalyzePage() {
 
 
                 </div>
-                  <div className="bg-surface border border-white/5 rounded-lg p-5">
+                <div className="bg-surface border border-white/5 rounded-lg p-5">
                   <p className="font-mono text-xs text-verified uppercase tracking-widest mb-3">
-                    Recommeneded to Add . {result.matchedSkills.length}
+                    Recommended to Add · {result.recommendedSkills.length}
                   </p>
                   <div>
                     {result.recommendedSkills.map((s) => (
@@ -329,50 +329,59 @@ export default function AnalyzePage() {
                 {interviewData && (
                   <div className="space-y-5 pt-2">
                     <div className="bg-surface border border-white/5 rounded-lg p-5">
-                      <p className="font-mono text-xs text-signal uppercase tracking-widest mb-3">Study before this interview</p>
-
-                      </div>
-                      {interviewData.focusAreass.map((area)=>(
-                        <span key={area} className="px-2.5 py-1 rounded-md bg-signal/10 border border-signal/20 text-xs font-mono text-signal">{area}</span>
-                      ))}
-
-                    </div>
-                    </div>
-
-                    {interviewData.questions.map((q,i)=>{
-                      <div key={i} className="bg-surface border border-white/5 rounded-lg p-5">
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="font-mono text-xs text-muted uppercase tracking-widest">{q.category}</span>
-                          <span className={`font-mono text-xs px-2 py-0.5 rounded-full border ${q.difficulty=="hard"
-                          ? "text-red-400 border-red-400/30 bg-red-400/10"
-                          : q.difficulty === "medium"
-                          ? "text-signal border-signal/30 bg-signal/10"
-                          : "text-verified border-verified/30 bg-verified/10"
-                          }
-                          `}>
-                            {q.difficulty}
-
-
+                      <p className="font-mono text-xs text-signal uppercase tracking-widest mb-3">
+                        Study before this interview
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {interviewData.focusAreas?.map((area) => (
+                          <span
+                            key={area}
+                            className="px-2.5 py-1 rounded-md bg-signal/10 border border-signal/20 text-xs font-mono text-signal"
+                          >
+                            {area}
                           </span>
+                        ))}
+                      </div>
+                    </div>
 
-                          </div>
-                          <p className="text-sm text-paper leading-relaxed mb-3">{q.question}</p>
-
-                          <div className="flex gap-2 pt-3 border-t border-white/5">
-                          <span className="text-signal text-xs mt-0.5 shrink-0">💡</span>
-                            <p className="text-xs text-muted leading-relaxed">{q.tip}</p>
-
-
-                            </div>
-
+                    {interviewData.questions?.map((q, i) => (
+                      <div
+                        key={i}
+                        className="bg-surface border border-white/5 rounded-lg p-5"
+                      >
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="font-mono text-xs text-muted uppercase tracking-widest">
+                            {q.category}
+                          </span>
+                          <span
+                            className={`font-mono text-xs px-2 py-0.5 rounded-full border ${
+                              q.difficulty === "hard"
+                                ? "text-red-400 border-red-400/30 bg-red-400/10"
+                                : q.difficulty === "medium"
+                                ? "text-signal border-signal/30 bg-signal/10"
+                                : "text-verified border-verified/30 bg-verified/10"
+                            }`}
+                          >
+                            {q.difficulty}
+                          </span>
                         </div>
-
-
-                ))}
-
+                        <p className="text-sm text-paper leading-relaxed mb-3">
+                          {q.question}
+                        </p>
+                        <div className="flex gap-2 pt-3 border-t border-white/5">
+                          <span className="text-signal text-xs mt-0.5 shrink-0">
+                            💡
+                          </span>
+                          <p className="text-xs text-muted leading-relaxed">
+                            {q.tip}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
-            }
+            )}
           </div>
         )}
       </main>

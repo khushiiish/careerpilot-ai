@@ -9,10 +9,13 @@ export async function getInterviewQuestionsRequest(
     missingSkills:string[],
 
 ):Promise<InterviewQuestionsResult>{
-    const {data}=await api.post("/interview/questions",{
-        jobDescription,
-        matchedSkills,
-        missingSkills
-    })
-    return {questions:data.question,focusAreas:data.focusAreas}
+  const { data } = await api.post("/interview/questions", {
+    jobDescription,
+    matchedSkills,
+    missingSkills,
+  });
+  return {
+    questions: data.data?.questions ?? data.questions ?? [],
+    focusAreas: data.data?.focusAreas ?? data.data?.focusAreass ?? data.focusAreas ?? [],
+  };
 }
