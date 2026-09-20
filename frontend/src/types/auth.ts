@@ -42,7 +42,7 @@ export interface InterviewQuestion {
 
 export interface InterviewQuestionsResult  {
     questions:InterviewQuestion[];
-    focusArea:string[]
+    focusAreas:string[]
 }
 
 export interface SkillGapResult {

@@ -10,7 +10,7 @@ export interface InterviewQuestions {
 
 export interface InterviewQuestionResult {
   questions: InterviewQuestions[];
-  focusAreas: string[];
+  focusAreass: string[];
 }
 
 const INTERVIEW_PROMPT = `You are an expert technical interviewer. Generate interview questions for a candidate based on the job description and their skill gaps.
@@ -35,7 +35,7 @@ Return ONLY valid JSON (no markdown fences, no preamble) with this exact shape:
       "tip": "What to focus on when answering this"
     }
   ],
-  "focusAreas": ["area1", "area2"]
+  "focusAreass": ["area1", "area2"]
 }
 
 Rules:
@@ -44,7 +44,7 @@ Rules:
 - Mix of difficulties: 2 easy, 4 medium, 2 hard
 - Focus questions on both matched skills (to confirm depth) and missing skills (to probe gaps)
 - tip should be 1 sentence of actionable advice for answering
-- focusAreas: 3-4 key topics the candidate should study before this interview`;
+- focusAreass: 3-4 key topics the candidate should study before this interview`;
 
 function stripMarkdownFences(text: string): string {
   return text

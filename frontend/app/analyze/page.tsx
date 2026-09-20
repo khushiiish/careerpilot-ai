@@ -308,8 +308,71 @@ export default function AnalyzePage() {
 
                   )}
                 </button>
+                {!interviewData && (
+                  <button 
+                  onClick={handleGenerateQuestions}
+                  disabled={interviewLoading}
+                  
+                  className="w-full bg-surface border border-white/10 text-paper font-medium text-sm rounded-md py-2.5 hover:border-signal/50 hover:text-signal disabled:opacity-50 transition flex items-center justify-center gap-2 ">
+                    {interviewLoading ?(
+                      <>
+                      <div className="w-4 h-4 border-2 border-muted border-t-transparent rounded-full animate-spin"/>
+                      Generating Questions...
+                      </>
+                      ):(
+                        "Generate Interview Questions"
+
+                      )}
+                  </button>
+                )}
+
+                {interviewData && (
+                  <div className="space-y-5 pt-2">
+                    <div className="bg-surface border border-white/5 rounded-lg p-5">
+                      <p className="font-mono text-xs text-signal uppercase tracking-widest mb-3">Study before this interview</p>
+
+                      </div>
+                      {interviewData.focusAreass.map((area)=>(
+                        <span key={area} className="px-2.5 py-1 rounded-md bg-signal/10 border border-signal/20 text-xs font-mono text-signal">{area}</span>
+                      ))}
+
+                    </div>
+                    </div>
+
+                    {interviewData.questions.map((q,i)=>{
+                      <div key={i} className="bg-surface border border-white/5 rounded-lg p-5">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="font-mono text-xs text-muted uppercase tracking-widest">{q.category}</span>
+                          <span className={`font-mono text-xs px-2 py-0.5 rounded-full border ${q.difficulty=="hard"
+                          ? "text-red-400 border-red-400/30 bg-red-400/10"
+                          : q.difficulty === "medium"
+                          ? "text-signal border-signal/30 bg-signal/10"
+                          : "text-verified border-verified/30 bg-verified/10"
+                          }
+                          `}>
+                            {q.difficulty}
+
+
+                          </span>
+
+                          </div>
+                          <p className="text-sm text-paper leading-relaxed mb-3">{q.question}</p>
+
+                          <div className="flex gap-2 pt-3 border-t border-white/5">
+                          <span className="text-signal text-xs mt-0.5 shrink-0">💡</span>
+                            <p className="text-xs text-muted leading-relaxed">{q.tip}</p>
+
+
+                            </div>
+
+                        </div>
+
+
+                ))}
+
+                )}
               </div>
-            )}
+            }
           </div>
         )}
       </main>

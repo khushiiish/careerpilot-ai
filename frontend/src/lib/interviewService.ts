@@ -14,5 +14,5 @@ export async function getInterviewQuestionsRequest(
         matchedSkills,
         missingSkills
     })
-    return {questions:data.question,focusArea:data.focusArea}
+    return {questions:data.question,focusAreas:data.focusAreas}
 }
